@@ -8,7 +8,7 @@ describe("Given an instance of my library", () => {
   });
   describe("when I need the name", () => {
     it("should return the name", () => {
-      expect(lib.name).to.be.equal("FeedbackBee");
+      expect(lib.name).to.be.equal("Collecte");
     });
   });
 });

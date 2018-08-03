@@ -1,7 +1,7 @@
 import { LibName, LibVersion, defaultInput, defaultOptions } from "./constants";
 import { getQuestion, getOptionalQuestion } from "./utils";
 
-export default class FeedbackBee {
+export default class Collecte {
   constructor(input = defaultInput, url = "", options = defaultOptions) {
     // Init object params
     this._name = LibName;

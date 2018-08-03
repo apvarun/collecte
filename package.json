@@ -1,5 +1,5 @@
 {
-  "name": "feedbackbee",
+  "name": "collecte",
   "version": "1.0.0",
   "description": "Minimal plugin to get feedback from your website",
   "main": "./index.js",
@@ -65,7 +65,7 @@
     "webpack-node-externals": "^0.4.1"
   },
   "library": {
-    "name": "FeedbackBee",
+    "name": "Collecte",
     "entry": "index.js",
     "dist-node": "index.js",
     "dist-web": "index.web.js",

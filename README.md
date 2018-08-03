@@ -1,4 +1,4 @@
-# FeedbackBee
+# Collecte
 
 > Minimal plugin to get feedback from your website
 

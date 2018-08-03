@@ -1,5 +1,5 @@
-export const LibName = "FeedbackBee";
-export const LibVersion = "1.0.0";
+export const LibName = "Collecte";
+export const LibVersion = "1.0.1";
 
 export const defaultInput = {
   question: "",
@@ -7,7 +7,7 @@ export const defaultInput = {
 };
 export const defaultOptions = {
   optionalInput: false,
-  gratitude: "Thank you for your feedback 🙏",
+  gratitude: "Thank you for your feedback!",
   target: document.body,
 };
 
