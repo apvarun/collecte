@@ -1,38 +1,37 @@
-var webpack = require('webpack');
-var path = require('path');
-var assign = require('object-assign');
-var nodeExternals = require('webpack-node-externals');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const webpack = require("webpack");
+const path = require("path");
+const assign = require("object-assign");
+const nodeExternals = require("webpack-node-externals");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
-module.exports = function getConfig(options){
-
+module.exports = function getConfig(options) {
   var options = options || {};
 
-  var isProd = (options.BUILD_ENV || process.env.BUILD_ENV) === 'PROD';
-  var isWeb = (options.TARGET_ENV || process.env.TARGET_ENV) === 'WEB';
+  var isProd = (options.BUILD_ENV || process.env.BUILD_ENV) === "PROD";
+  var isWeb = (options.TARGET_ENV || process.env.TARGET_ENV) === "WEB";
 
   // get library details from JSON config
-  var libraryDesc = require('./package.json').library;
+  var libraryDesc = require("./package.json").library;
   var libraryName = libraryDesc.name;
 
   // determine output file name
   var outputName = buildLibraryOutputName(libraryDesc, isWeb, isProd);
-  var outputFolder = isWeb ? 'dist' : 'lib';
+  var outputFolder = isWeb ? "dist" : "lib";
 
   // get base config
   var config;
 
   // for the web
-  if(isWeb){
+  if (isWeb) {
     config = assign(getBaseConfig(isProd), {
       output: {
         path: path.join(__dirname, outputFolder),
         filename: outputName,
         library: libraryName,
-        libraryTarget: 'umd',
-        umdNamedDefine: true
-      }
+        libraryTarget: "umd",
+        umdNamedDefine: true,
+      },
     });
   }
 
@@ -43,21 +42,21 @@ module.exports = function getConfig(options){
         path: path.join(__dirname, outputFolder),
         filename: outputName,
         library: libraryName,
-        libraryTarget: 'commonjs2'
+        libraryTarget: "commonjs2",
       },
-      target: 'node',
+      target: "node",
       node: {
         __dirname: true,
-        __filename: true
+        __filename: true,
       },
-      externals: [nodeExternals()]
+      externals: [nodeExternals()],
     });
   }
 
   config.plugins.push(new CleanWebpackPlugin([outputFolder]));
 
   return config;
-}
+};
 
 /**
  * Build base config
@@ -65,10 +64,9 @@ module.exports = function getConfig(options){
  * @return {[type]}         [description]
  */
 function getBaseConfig(isProd) {
-
   // get library details from JSON config
-  var libraryDesc = require('./package.json').library;
-  var libraryEntryPoint = path.join('src', libraryDesc.entry);
+  var libraryDesc = require("./package.json").library;
+  var libraryEntryPoint = path.join("src", libraryDesc.entry);
 
   // generate webpack base config
   return {
@@ -78,36 +76,56 @@ function getBaseConfig(isProd) {
     },
     module: {
       preLoaders: [
-        {test: /\.js$/, exclude: /(node_modules|bower_components)/, loader: "eslint-loader"}
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: "eslint-loader",
+        },
       ],
       loaders: [
-        {test: /\.js$/, exclude: /(node_modules|bower_components)/, loader: "babel-loader"},
-      ]
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: "babel-loader",
+        },
+      ],
     },
     eslint: {
-        configFile: './.eslintrc'
+      configFile: "./.eslintrc",
     },
     resolve: {
-      root: path.resolve('./src'),
-      extensions: ['', '.js']
+      root: path.resolve("./src"),
+      extensions: ["", ".js"],
     },
-    devtool: isProd ? null : '#eval-source-map',
+    devtool: isProd ? null : "#eval-source-map",
     debug: !isProd,
-    plugins: isProd ? [
-      new webpack.DefinePlugin({'process.env': {'NODE_ENV': '"production"'}}),
-      new UglifyJsPlugin({ minimize: true })
-      // Prod plugins here
-    ] : [
-      new webpack.DefinePlugin({'process.env': {'NODE_ENV': '"development"'}})
-      // Dev plugins here
-    ]
+    plugins: isProd
+      ? [
+          new webpack.DefinePlugin({
+            "process.env": { NODE_ENV: '"production"' },
+          }),
+          new UglifyJsPlugin({ minimize: true }),
+          // Prod plugins here
+        ]
+      : [
+          new webpack.DefinePlugin({
+            "process.env": { NODE_ENV: '"development"' },
+          }),
+          // Dev plugins here
+        ],
   };
 }
 
-function buildLibraryOutputName(libraryDesc, isWeb, isProd){
-  if(isWeb){
-    return libraryDesc["dist-web"] || [libraryDesc.name, 'web', (isProd ? 'min.js' : 'js')].join('.');
+function buildLibraryOutputName(libraryDesc, isWeb, isProd) {
+  if (isWeb) {
+    return (
+      libraryDesc["dist-web"] ||
+      [libraryDesc.name, "web", isProd ? "min.js" : "js"].join(".")
+    );
   } else {
-    return libraryDesc["dist-node"] || [libraryDesc.name, (isProd ? 'min.js' : 'js')].join('.');
+    return (
+      libraryDesc["dist-node"] ||
+      [libraryDesc.name, isProd ? "min.js" : "js"].join(".")
+    );
   }
 }

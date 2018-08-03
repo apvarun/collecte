@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeedbackBee - Minimal plugin to get feedback from your website</title>
+    <meta name="description" content="FeedbackBee is a Minimal plugin to get feedback from your website">
+    <meta name="keywords" content="Javascript,Library,Toastify">
+    <meta name="author" content="apvarun">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-size: 100%;
+            margin: 0;
+            padding: 0;
+            color: #424242;
+        }
+
+        .container {
+            overflow: hidden;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: -40px 10px 0 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .docs {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            border: 1px solid #e3e3e3;
+            padding: 20px 20px;
+            width: 60%;
+            border-radius: 4px;
+        }
+
+        .docs h2 {
+            margin-top: 0px;
+        }
+
+        code p {
+            margin: 2px;
+        }
+
+        .pad-left {
+            padding-left: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            overflow: hidden;
+            margin: 10px;
+            padding: 12px 12px;
+            cursor: pointer;
+            -webkit-transition: all 200ms ease-in-out;
+            transition: all 200ms ease-in-out;
+            text-align: center;
+            white-space: nowrap;
+            text-decoration: none;
+            text-transform: none;
+            text-transform: capitalize;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.3;
+            min-width: 100px;
+            display: inline-block;
+            color: #FD6E6A;
+            background-color: #FFFFFF;
+        }
+
+        .button:hover {
+            color: #FFFFFF;
+            background: linear-gradient(135deg, #FD6E6A, #FFC600);
+        }
+
+        .repo {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body id="root">
+    <div class="container">
+        <div class="lead">
+            <h1>FeedbackBee</h1>
+        </div>
+        <p>Minimal plugin to get feedback from your website</p>
+        <div class="buttons">
+            <a href="https://github.com/apvarun/feedbackbee/blob/master/README.md" target="_blank" class="button">Docs</a>
+            <a href="https://twitter.com/intent/tweet?text=Minimal+plugin+to+get+feedback+from+your+website&url=https://apvarun.github.io/feedbackbee/&hashtags=JavaScript,feedback&via=apvarun"
+                target="_blank" class="button">Tweet</a>
+        </div>
+        <!-- <div class="repo">
+            <iframe src="https://ghbtns.com/github-btn.html?user=apvarun&repo=feedbackbee&type=star&count=true&size=large" frameborder="0"
+                scrolling="0" width="160px" height="30px"></iframe>
+        </div> -->
+    </div>
+</body>
+
+<script type="text/javascript" src="../dist/index.web.js"></script>
+<script type="text/javascript">
+    var input = {
+        question: "How would you rate our service ?",
+        answers: ["Awesome", "Good", "Not Satisfied"]
+    }
+    var fb = new FeedbackBee(input);
+    fb.init();
+</script>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', '', 'auto'); // Analytics code
+    ga('send', 'pageview');
+</script>
+
+</html>
