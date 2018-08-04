@@ -70,5 +70,6 @@
     "dist-node": "index.js",
     "dist-web": "index.web.js",
     "bundle-node": false
-  }
+  },
+  "dependencies": {}
 }
